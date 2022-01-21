@@ -13,6 +13,11 @@ jobs:
           yarn install
           yarn build
           ( sleep 10 && yarn start ) &
+          while true; do curl -sL localhost:3000 1>/dev/null && break; done
+          # DON'T LOOP THIS WAY: IT'S JUST A TOY
+          # The point here is to be sure the server started
+          # before the `mv` command that follows is run.
+          # Otherwise the server will load the wrong env file
 
       - run: mv .env.development .env.production
 
