@@ -1,4 +1,11 @@
 import Head from 'next/head'
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig } = getConfig()
+
+export function getServerSideProps() {
+  return { props: { env: publicRuntimeConfig.env } }
+}
 
 export default function Home({ env }) {
   return (
@@ -10,7 +17,7 @@ export default function Home({ env }) {
 
       <main>
         <h1 className="title">
-          Welcome {env}
+          Welcome { env }
         </h1>
 
         <p className="description">
@@ -206,8 +213,4 @@ export default function Home({ env }) {
       `}</style>
     </div>
   )
-}
-
-export function getStaticProps() {
-  return { props: { env: process.env.ENV } }
 }
