@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-export default function Home() {
+export default function Home({ env }) {
   return (
     <div className="container">
       <Head>
@@ -10,7 +10,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome {env}
         </h1>
 
         <p className="description">
@@ -206,4 +206,8 @@ export default function Home() {
       `}</style>
     </div>
   )
+}
+
+export function getStaticProps() {
+  return { props: { env: process.env.ENV } }
 }
